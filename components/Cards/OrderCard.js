@@ -1,8 +1,11 @@
 import { Button, Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { deleteOrder } from '../../api/orderData';
 
-export default function OrderCard({ orderObj }) {
+export default function OrderCard({ orderObj, onUpdate }) {
+  const deleteThisOrder = (id) => deleteOrder(id).then(onUpdate);
+
   return (
     <>
       <Card style={{ width: '18rem' }}>
@@ -15,7 +18,7 @@ export default function OrderCard({ orderObj }) {
           {orderObj.isOpen
             ? (
               <>
-                <Button variant="danger" size="sm">Delete</Button>
+                <Button variant="danger" size="sm" onClick={() => deleteThisOrder(orderObj.id)}>Delete</Button>
                 <Link passHref href={`/orders/edit/${orderObj.id}`}>
                   <Button variant="success" size="sm">Edit</Button>
                 </Link>
@@ -37,4 +40,5 @@ OrderCard.propTypes = {
     totalPrice: PropTypes.number,
     isOpen: PropTypes.bool,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };

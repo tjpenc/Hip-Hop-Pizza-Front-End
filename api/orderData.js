@@ -29,7 +29,19 @@ const getSingleOrder = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const deleteOrder = (id) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/orders/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
   getOrders,
   getSingleOrder,
+  deleteOrder,
 };

@@ -5,8 +5,10 @@ import { getOrders } from '../../api/orderData';
 export default function ViewOrders() {
   const [orders, setOrders] = useState([]);
 
+  const getAllOrders = () => getOrders().then(setOrders);
+
   useEffect(() => {
-    getOrders().then(setOrders);
+    getAllOrders();
   }, []);
 
   return (
@@ -14,7 +16,7 @@ export default function ViewOrders() {
       <h1>All Orders</h1>
       {orders?.length === 0
         ? 'There are no orders in the system'
-        : orders?.map((order) => <OrderCard key={order.id} orderObj={order} />)}
+        : orders?.map((order) => <OrderCard key={order.id} orderObj={order} onUpdate={getAllOrders} />)}
     </>
   );
 }
