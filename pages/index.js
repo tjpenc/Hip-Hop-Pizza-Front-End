@@ -1,7 +1,7 @@
 import { Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import RegisterForm from '../components/RegisterForm';
-import { signOut, checkUser } from '../utils/auth';
+import { checkUser } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 
 function Home() {
@@ -33,10 +33,16 @@ function Home() {
           }}
         >
           <h1>Hello {user?.fbUser?.displayName}! </h1>
-          {/* <p>Your Bio: {user?.bio}</p> */}
-          <p>Click the button below to logout!</p>
-          <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-            Sign Out
+          <Button variant="secondary" type="button" size="lg" className="copy-btn" onClick={() => console.warn('clicked view orders')}>
+            View Orders
+          </Button>
+          <br />
+          <Button variant="secondary" type="button" size="lg" className="copy-btn" onClick={() => console.warn('clicked create orders')}>
+            Create Orders
+          </Button>
+          <br />
+          <Button variant="secondary" type="button" size="lg" className="copy-btn" onClick={() => console.warn('clicked view revenue')}>
+            View Revenue
           </Button>
         </div>
       ) : (<RegisterForm user={user} onUpdate={onUpdate} />)}
