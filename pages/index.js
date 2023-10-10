@@ -1,4 +1,5 @@
 import { Button } from 'react-bootstrap';
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import RegisterForm from '../components/RegisterForm';
 import { checkUser } from '../utils/auth';
@@ -33,17 +34,23 @@ function Home() {
           }}
         >
           <h1>Hello {user?.fbUser?.displayName}! </h1>
-          <Button variant="secondary" type="button" size="lg" className="copy-btn" onClick={() => console.warn('clicked view orders')}>
-            View Orders
-          </Button>
+          <Link passHref href="/orders/orders">
+            <Button variant="secondary" type="button" size="lg" className="copy-btn">
+              View Orders
+            </Button>
+          </Link>
           <br />
-          <Button variant="secondary" type="button" size="lg" className="copy-btn" onClick={() => console.warn('clicked create orders')}>
-            Create Orders
-          </Button>
+          <Link passHref href="/orders/createOrder">
+            <Button variant="secondary" type="button" size="lg" className="copy-btn">
+              Create an Order
+            </Button>
+          </Link>
           <br />
-          <Button variant="secondary" type="button" size="lg" className="copy-btn" onClick={() => console.warn('clicked view revenue')}>
-            View Revenue
-          </Button>
+          <Link passHref href="/revenue">
+            <Button variant="secondary" type="button" size="lg" className="copy-btn">
+              Revenue
+            </Button>
+          </Link>
         </div>
       ) : (<RegisterForm user={user} onUpdate={onUpdate} />)}
     </>
