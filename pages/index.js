@@ -18,9 +18,6 @@ function Home() {
     checkUser(user.uid).then((data) => setAuthUser(data));
   };
 
-  console.warn(user.uid);
-  console.warn(authUser?.uid);
-
   return (
     <>
       {authUser?.uid === user?.uid ? (
