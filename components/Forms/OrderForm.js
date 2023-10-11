@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { createOrder } from '../../api/orderData';
+import { createOrder, updateOrder } from '../../api/orderData';
 import { useAuth } from '../../utils/context/authContext';
 import { getPaymentTypes } from '../../api/paymentTypeData';
 
@@ -14,7 +15,7 @@ const initialState = {
   paymentTypeId: 1,
 };
 
-export default function OrderForm() {
+export default function OrderForm({ orderObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const [paymentTypes, setPaymentTypes] = useState([]);
   const router = useRouter();
@@ -22,12 +23,12 @@ export default function OrderForm() {
   // when a field is filled, need to update state
 
   useEffect(() => {
-    setFormInput((prevState) => ({
-      ...prevState,
-      uid: user.uid,
-    }));
     getPaymentTypes().then(setPaymentTypes);
-  }, []);
+    if (orderObj.id) {
+      setFormInput(orderObj);
+    }
+    console.warn(orderObj);
+  }, [orderObj]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +36,11 @@ export default function OrderForm() {
       ...prevState,
       [name]: value,
     }));
+    console.warn(formInput);
+  };
+
+  const addUid = () => {
+    formInput.uid = user.uid;
   };
 
   const handleRadioChange = () => {
@@ -48,7 +54,12 @@ export default function OrderForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleRadioChange();
-    createOrder(formInput).then((order) => router.push(`/addItems/${order.id}`));
+    addUid();
+    if (orderObj.id) {
+      updateOrder(formInput).then(router.push(`/orders/${orderObj.id}`));
+    } else {
+      createOrder(formInput).then((order) => router.push(`/addItems/${order.id}`));
+    }
   };
 
   return (
@@ -114,3 +125,27 @@ export default function OrderForm() {
     </>
   );
 }
+
+OrderForm.propTypes = {
+  orderObj: PropTypes.shape({
+    id: PropTypes.number,
+    uid: PropTypes.string,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    phone: PropTypes.string,
+    orderType: PropTypes.bool,
+    paymentTypeId: PropTypes.number,
+  }),
+};
+
+OrderForm.defaultProps = {
+  orderObj: PropTypes.shape({
+    id: 0,
+    uid: '',
+    name: '',
+    email: '',
+    phone: '',
+    orderType: false,
+    paymentTypeId: 1,
+  }),
+};
