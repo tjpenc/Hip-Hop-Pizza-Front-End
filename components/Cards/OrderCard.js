@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { deleteOrder } from '../../api/orderData';
 
 export default function OrderCard({ orderObj, onUpdate }) {
-  const deleteThisOrder = (id) => deleteOrder(id).then(onUpdate);
+  const deleteThisOrder = (id) => deleteOrder(id).then(() => onUpdate());
 
   return (
     <>
@@ -12,19 +12,19 @@ export default function OrderCard({ orderObj, onUpdate }) {
         <Card.Body>
           <Card.Title>{orderObj.name}</Card.Title>
           {orderObj.isOpen
-            ? <Card.Title>Order Closed</Card.Title>
-            : <Card.Title>Order Open</Card.Title>}
+            ? <Card.Title>Order Open</Card.Title>
+            : <Card.Title>Order Closed</Card.Title>}
           <Card.Text>${orderObj.totalPrice}</Card.Text>
           {orderObj.isOpen
             ? (
               <>
                 <Button variant="danger" size="sm" onClick={() => deleteThisOrder(orderObj.id)}>Delete</Button>
                 <Link passHref href={`/orders/edit/${orderObj.id}`}>
-                  <Button variant="success" size="sm">Edit</Button>
+                  <Button variant="success" size="sm">Edit Customer</Button>
                 </Link>
               </>
             ) : ''}
-          <Link passHref href={`orders/${orderObj.id}`}>
+          <Link passHref href={`/orders/${orderObj.id}`}>
             <Button variant="primary" size="sm">Details</Button>
           </Link>
         </Card.Body>
