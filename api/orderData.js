@@ -29,6 +29,33 @@ const getSingleOrder = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const createOrder = (payload) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/orders`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((resp) => resp.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const updateOrder = (payload) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/orders/${payload.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((resp) => resp.json)
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 const deleteOrder = (id) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/orders/${id}`, {
     method: 'DELETE',
@@ -43,5 +70,7 @@ const deleteOrder = (id) => new Promise((resolve, reject) => {
 export {
   getOrders,
   getSingleOrder,
+  createOrder,
+  updateOrder,
   deleteOrder,
 };
