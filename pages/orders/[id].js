@@ -12,8 +12,6 @@ export default function ViewDetailedOrder() {
 
   const getThisOrder = () => getSingleOrder(id).then(setOrder);
 
-  console.warn(order);
-
   useEffect(() => {
     getThisOrder();
   }, [id]);
