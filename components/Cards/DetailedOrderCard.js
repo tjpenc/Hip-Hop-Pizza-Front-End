@@ -51,7 +51,7 @@ DetailedOrderCard.propTypes = {
     name: PropTypes.string,
     totalPrice: PropTypes.number,
     isOpen: PropTypes.bool,
-    dateClosed: PropTypes.instanceOf(Date),
+    dateClosed: PropTypes.string,
     phone: PropTypes.string,
     email: PropTypes.string,
     orderType: PropTypes.string,
