@@ -7,7 +7,7 @@ export default function ItemCard({
   itemObj, orderObj, onUpdate, isAddingItems,
 }) {
   const deleteThisItem = () => deleteItem(itemObj.id).then(onUpdate);
-  const addItemToThisOrder = () => addOrderItem(orderObj.id, itemObj.id).then(console.warn('added item'));
+  const addItemToThisOrder = () => addOrderItem(orderObj.id, itemObj.id).then(onUpdate);
 
   return (
     <Card style={{ width: '18rem' }}>
