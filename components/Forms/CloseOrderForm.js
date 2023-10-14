@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { closeOrder } from '../../api/orderData';
+import { closeOrder, createRevenueNode } from '../../api/orderData';
 
 const initialState = {
   id: 0,
@@ -28,7 +28,8 @@ export default function CloseOrderForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     formInput.id = id;
-    closeOrder(formInput).then(router.push(`/orders/${id}`));
+    // closeOrder(formInput).then(router.push(`/orders/${id}`));
+    closeOrder(formInput).then((order) => createRevenueNode(order).then(router.push(`/orders/${id}`)));
   };
   return (
     <>
