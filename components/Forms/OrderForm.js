@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { createOrder, updateOrder } from '../../api/orderData';
 import { useAuth } from '../../utils/context/authContext';
-import { getPaymentTypes } from '../../api/paymentTypeData';
 
 const initialState = {
   uid: '',
@@ -12,18 +11,15 @@ const initialState = {
   email: '',
   phone: '',
   orderType: false,
-  paymentTypeId: 1,
 };
 
 export default function OrderForm({ orderObj }) {
   const [formInput, setFormInput] = useState(initialState);
-  const [paymentTypes, setPaymentTypes] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
   // when a field is filled, need to update state
 
   useEffect(() => {
-    getPaymentTypes().then(setPaymentTypes);
     if (orderObj.id) {
       setFormInput(orderObj);
     }
@@ -45,9 +41,9 @@ export default function OrderForm({ orderObj }) {
 
   const handleRadioChange = () => {
     if (!formInput.orderType) {
-      formInput.orderType = 'Dine-In';
+      formInput.orderType = 'In-person';
     } else {
-      formInput.orderType = 'Takeout';
+      formInput.orderType = 'Phone';
     }
   };
 
@@ -98,22 +94,10 @@ export default function OrderForm({ orderObj }) {
             required
           />
         </Form.Group>
-        <Form.Select
-          aria-label="Default select example"
-          name="paymentTypeId"
-          onChange={handleChange}
-          value={formInput.paymentTypeId}
-          required
-        >
-          <option value="">Please Select an Option</option>
-          {paymentTypes?.map((paymentType) => (
-            <option key={paymentType.id} value={paymentType.id}>{paymentType.type}</option>
-          ))}
-        </Form.Select>
         <Form.Check
           className="mb-3"
           inline
-          label="Takeout"
+          label="Phone Order?"
           name="orderType"
           type="checkbox"
           value={formInput.orderType}
