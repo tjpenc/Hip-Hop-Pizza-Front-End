@@ -92,6 +92,31 @@ const closeOrder = (orderPayload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const createRevenueNode = (payload) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/revenueNodes`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((resp) => resp.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const getTotalRevenue = () => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/revenue`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((resp) => resp.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
   getOrders,
   getSingleOrder,
@@ -100,4 +125,6 @@ export {
   deleteOrder,
   updateOrderPrice,
   closeOrder,
+  createRevenueNode,
+  getTotalRevenue,
 };
