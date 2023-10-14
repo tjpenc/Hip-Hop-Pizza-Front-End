@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import ItemCard from '../../components/Cards/ItemCard';
 import { getItems } from '../../api/itemData';
-import { getSingleOrder } from '../../api/orderData';
+import { getSingleOrder, updateOrderPrice } from '../../api/orderData';
 import { getItemsForOrder } from '../../api/orderItemData';
 
 export default function AddItems() {
@@ -20,16 +20,18 @@ export default function AddItems() {
     getItemsForOrder(orderId).then(setOrderItems);
   }, []);
 
+  const getAllOrderItems = () => getItemsForOrder(orderId).then(setOrderItems).then(updateOrderPrice(order).then(setOrder));
+
   return (
     <>
       <h1>{`Add Items to ${order.name}'s Order`}</h1>
       <div>
-        <h2>Items Added</h2>
+        <h2>Items Added | Total Price: {order.totalPrice}</h2>
         {orderItems?.map((orderItem) => <span key={orderItems.indexOf(orderItem)}>{orderItem.item.name}: ${orderItem.item.price} | </span>)}
       </div>
       <br />
       <h2>Menu</h2>
-      {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={order} onUpdate={() => {}} isAddingItems />)}
+      {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={order} onUpdate={getAllOrderItems} isAddingItems />)}
       <br />
       <Link passHref href={`/orders/closeOrder/${orderId}`}>
         <Button>Continue to Checkout</Button>
