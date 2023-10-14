@@ -1,5 +1,6 @@
 import { Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { deleteItem } from '../../api/itemData';
 import { addOrderItem } from '../../api/orderItemData';
 
@@ -19,7 +20,9 @@ export default function ItemCard({
           : (
             <>
               <Button variant="danger" size="sm" onClick={() => deleteThisItem(itemObj.id)}>Delete</Button>
-              <Button variant="success">Edit Item</Button>
+              <Link passHref href={`/items/edit/${itemObj.id}`}>
+                <Button variant="success">Edit Item</Button>
+              </Link>
             </>
           )}
       </Card.Body>
