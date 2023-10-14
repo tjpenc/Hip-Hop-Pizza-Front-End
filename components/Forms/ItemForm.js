@@ -19,7 +19,6 @@ export default function OrderForm({ itemObj }) {
     if (itemObj.id) {
       setFormInput(itemObj);
     }
-    console.warn(itemObj);
   }, [itemObj]);
 
   const handleChange = (e) => {
@@ -28,7 +27,6 @@ export default function OrderForm({ itemObj }) {
       ...prevState,
       [name]: value,
     }));
-    console.warn(formInput);
   };
 
   const handleSubmit = (e) => {

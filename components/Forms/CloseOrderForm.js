@@ -29,7 +29,6 @@ export default function CloseOrderForm() {
       ...prevState,
       [name]: value,
     }));
-    console.warn(formInput);
   };
 
   const handleSubmit = (e) => {
@@ -44,7 +43,7 @@ export default function CloseOrderForm() {
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Tip</Form.Label>
           <Form.Control
-            type="text"
+            type="number"
             placeholder="Tip"
             name="tip"
             value={formInput.tip}
