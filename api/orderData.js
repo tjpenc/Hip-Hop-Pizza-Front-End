@@ -67,8 +67,20 @@ const deleteOrder = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateOrderPrice = (orderPayload) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/orders/price/${orderPayload.id}`, {
+const updateOrderPrice = (orderId) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/orders/price/${orderId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((resp) => resp.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const closeOrder = (orderPayload) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/orders/${orderPayload.id}/close`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -87,4 +99,5 @@ export {
   updateOrder,
   deleteOrder,
   updateOrderPrice,
+  closeOrder,
 };

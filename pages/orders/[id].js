@@ -14,6 +14,7 @@ export default function ViewDetailedOrder() {
   const { id } = router.query;
 
   const getItemsForThisOrder = () => getItemsForOrder(id).then(setOrderItems);
+
   useEffect(() => {
     getSingleOrder(id).then(setOrder);
     getItemsForThisOrder();

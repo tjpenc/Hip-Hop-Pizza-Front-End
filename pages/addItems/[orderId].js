@@ -21,21 +21,15 @@ export default function AddItems() {
     getItemsForOrder(orderId).then(setOrderItems);
   }, []);
 
-  // useEffect(() => {
-  //   getItemsForOrder(orderId).then(setItems);
-  // }, [isDeleted]);
-
-  const getAllOrderItems = () => getItemsForOrder(orderId).then(setOrderItems).then(updateOrderPrice(order).then(setOrder));
-  // const removeItemFromThisOrder = (itemId) => deleteOrderItem(orderId, itemId).then(setIsDeleted((prevState) => !prevState));
+  const getAllOrderItems = () => getItemsForOrder(orderId).then(setOrderItems).then(updateOrderPrice(orderId).then(setOrder));
 
   return (
     <>
       <h1>{`Add Items to ${order.name}'s Order`}</h1>
       <div>
-        <h2>Items Added | Total Price: {order.totalPrice}</h2>
+        <h2>Items Added | Total Price: ${order.totalPrice}</h2>
         {orderItems?.map((orderItem) => (
           <span key={orderItems.indexOf(orderItem)}> {orderItem.item.name}: ${orderItem.item.price} |
-            {/* <Button variant="danger" onClick={() => removeItemFromThisOrder(orderItem.item.id)}>Delete Item</Button>| */}
           </span>
         ))}
       </div>

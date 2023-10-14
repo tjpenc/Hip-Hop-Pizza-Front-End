@@ -17,7 +17,12 @@ export default function ItemCard({
         <Card.Title>{itemObj.name}</Card.Title>
         <Card.Text>${itemObj.price}</Card.Text>
         {isAddingItems
-          ? <Button variant="primary" onClick={addItemToThisOrder}>Add to Order</Button>
+          ? (
+            <>
+              <Button variant="primary" onClick={addItemToThisOrder}>Add to Order</Button>
+              <Button variant="danger" onClick={removeItemFromThisOrder}>Remove From Order</Button>
+            </>
+          )
           : ''}
         {isOnMenu
           ? (
@@ -29,7 +34,7 @@ export default function ItemCard({
             </>
           )
           : ''}
-        {isOnDetailedOrder
+        {isOnDetailedOrder && orderObj.isOpen
           ? (
             <>
               <Button variant="danger" size="sm" onClick={removeItemFromThisOrder}>Delete From Order</Button>
@@ -50,6 +55,7 @@ ItemCard.propTypes = {
   }).isRequired,
   orderObj: PropTypes.shape({
     id: PropTypes.number,
+    isOpen: PropTypes.bool,
   }),
   onUpdate: PropTypes.func.isRequired,
   isAddingItems: PropTypes.bool,
@@ -60,6 +66,7 @@ ItemCard.propTypes = {
 ItemCard.defaultProps = {
   orderObj: {
     id: 0,
+    isOpen: true,
   },
   isAddingItems: false,
   isOnMenu: false,
