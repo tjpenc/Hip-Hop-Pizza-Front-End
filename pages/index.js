@@ -12,7 +12,7 @@ function Home() {
   useEffect(() => {
     checkUser(user.uid).then((data) => setAuthUser(data[0]));
     console.warn('thisUser', authUser);
-  }, []);
+  }, [user]);
 
   const onUpdate = () => {
     checkUser(user.uid).then((data) => setAuthUser(data));
