@@ -1,9 +1,13 @@
 import { Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { deleteItem } from '../../api/itemData';
+import { addOrderItem } from '../../api/orderItemData';
 
-export default function ItemCard({ itemObj, onUpdate, isAddingItems }) {
+export default function ItemCard({
+  itemObj, orderObj, onUpdate, isAddingItems,
+}) {
   const deleteThisItem = () => deleteItem(itemObj.id).then(onUpdate);
+  const addItemToThisOrder = () => addOrderItem(orderObj.id, itemObj.id).then(console.warn('added item'));
 
   return (
     <Card style={{ width: '18rem' }}>
@@ -11,7 +15,7 @@ export default function ItemCard({ itemObj, onUpdate, isAddingItems }) {
         <Card.Title>{itemObj.name}</Card.Title>
         <Card.Text>${itemObj.price}</Card.Text>
         {isAddingItems
-          ? <Button variant="primary">Add to Order</Button>
+          ? <Button variant="primary" onClick={addItemToThisOrder}>Add to Order</Button>
           : (
             <>
               <Button variant="danger" size="sm" onClick={() => deleteThisItem(itemObj.id)}>Delete</Button>
@@ -29,6 +33,9 @@ ItemCard.propTypes = {
     name: PropTypes.string,
     imageUrl: PropTypes.string,
     price: PropTypes.number,
+  }).isRequired,
+  orderObj: PropTypes.shape({
+    id: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
   isAddingItems: PropTypes.bool.isRequired,
