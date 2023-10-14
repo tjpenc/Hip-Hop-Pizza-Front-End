@@ -34,6 +34,9 @@ export default function DetailedOrderCard({ orderObj }) {
                 <Link passHref href={`/addItems/${orderObj.id}`}>
                   <Button variant="primary" size="sm">Edit Items</Button>
                 </Link>
+                <Link passHref href={`/orders/closeOrder/${orderObj.id}`}>
+                  <Button variant="primary" size="sm">Close Order</Button>
+                </Link>
               </>
             ) : ''}
         </Card.Body>
