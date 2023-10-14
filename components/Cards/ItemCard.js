@@ -36,7 +36,13 @@ ItemCard.propTypes = {
   }).isRequired,
   orderObj: PropTypes.shape({
     id: PropTypes.number,
-  }).isRequired,
+  }),
   onUpdate: PropTypes.func.isRequired,
   isAddingItems: PropTypes.bool.isRequired,
+};
+
+ItemCard.defaultProps = {
+  orderObj: {
+    id: 0,
+  },
 };
