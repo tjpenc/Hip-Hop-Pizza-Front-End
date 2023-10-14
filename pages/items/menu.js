@@ -16,7 +16,7 @@ export default function Menu() {
   return (
     <>
       <h1>Menu</h1>
-      {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={null} onUpdate={getAllItems} isAddingItems={false} />)}
+      {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={null} onUpdate={getAllItems} isOnMenu />)}
       <br />
       <Link passHref href="/items/createItem">
         <Button>Add a New Item</Button>

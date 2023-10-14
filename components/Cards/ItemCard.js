@@ -2,13 +2,14 @@ import { Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { deleteItem } from '../../api/itemData';
-import { addOrderItem } from '../../api/orderItemData';
+import { addOrderItem, deleteOrderItem } from '../../api/orderItemData';
 
 export default function ItemCard({
-  itemObj, orderObj, onUpdate, isAddingItems,
+  itemObj, orderObj, onUpdate, isAddingItems, isOnMenu, isOnDetailedOrder,
 }) {
   const deleteThisItem = () => deleteItem(itemObj.id).then(onUpdate);
   const addItemToThisOrder = () => addOrderItem(orderObj.id, itemObj.id).then(onUpdate);
+  const removeItemFromThisOrder = () => deleteOrderItem(orderObj.id, itemObj.id).then(onUpdate);
 
   return (
     <Card style={{ width: '18rem' }}>
@@ -17,14 +18,24 @@ export default function ItemCard({
         <Card.Text>${itemObj.price}</Card.Text>
         {isAddingItems
           ? <Button variant="primary" onClick={addItemToThisOrder}>Add to Order</Button>
-          : (
+          : ''}
+        {isOnMenu
+          ? (
             <>
               <Button variant="danger" size="sm" onClick={() => deleteThisItem(itemObj.id)}>Delete</Button>
               <Link passHref href={`/items/edit/${itemObj.id}`}>
                 <Button variant="success">Edit Item</Button>
               </Link>
             </>
-          )}
+          )
+          : ''}
+        {isOnDetailedOrder
+          ? (
+            <>
+              <Button variant="danger" size="sm" onClick={removeItemFromThisOrder}>Delete From Order</Button>
+            </>
+          )
+          : ''}
       </Card.Body>
     </Card>
   );
@@ -41,11 +52,16 @@ ItemCard.propTypes = {
     id: PropTypes.number,
   }),
   onUpdate: PropTypes.func.isRequired,
-  isAddingItems: PropTypes.bool.isRequired,
+  isAddingItems: PropTypes.bool,
+  isOnMenu: PropTypes.bool,
+  isOnDetailedOrder: PropTypes.bool,
 };
 
 ItemCard.defaultProps = {
   orderObj: {
     id: 0,
   },
+  isAddingItems: false,
+  isOnMenu: false,
+  isOnDetailedOrder: false,
 };

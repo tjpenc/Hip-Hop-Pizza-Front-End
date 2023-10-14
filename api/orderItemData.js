@@ -20,7 +20,6 @@ const deleteOrderItem = (orderId, itemId) => new Promise((resolve, reject) => {
       'Content-Type': 'application/json',
     },
   })
-    .then((resp) => resp.json())
     .then((data) => resolve(data))
     .catch(reject);
 });

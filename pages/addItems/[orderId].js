@@ -11,6 +11,7 @@ export default function AddItems() {
   const [items, setItems] = useState([]);
   const [order, setOrder] = useState({});
   const [orderItems, setOrderItems] = useState([]);
+  // const [isDeleted, setIsDeleted] = useState(false);
   const router = useRouter();
   const { orderId } = router.query;
 
@@ -20,14 +21,23 @@ export default function AddItems() {
     getItemsForOrder(orderId).then(setOrderItems);
   }, []);
 
+  // useEffect(() => {
+  //   getItemsForOrder(orderId).then(setItems);
+  // }, [isDeleted]);
+
   const getAllOrderItems = () => getItemsForOrder(orderId).then(setOrderItems).then(updateOrderPrice(order).then(setOrder));
+  // const removeItemFromThisOrder = (itemId) => deleteOrderItem(orderId, itemId).then(setIsDeleted((prevState) => !prevState));
 
   return (
     <>
       <h1>{`Add Items to ${order.name}'s Order`}</h1>
       <div>
         <h2>Items Added | Total Price: {order.totalPrice}</h2>
-        {orderItems?.map((orderItem) => <span key={orderItems.indexOf(orderItem)}>{orderItem.item.name}: ${orderItem.item.price} | </span>)}
+        {orderItems?.map((orderItem) => (
+          <span key={orderItems.indexOf(orderItem)}> {orderItem.item.name}: ${orderItem.item.price} |
+            {/* <Button variant="danger" onClick={() => removeItemFromThisOrder(orderItem.item.id)}>Delete Item</Button>| */}
+          </span>
+        ))}
       </div>
       <br />
       <h2>Menu</h2>
