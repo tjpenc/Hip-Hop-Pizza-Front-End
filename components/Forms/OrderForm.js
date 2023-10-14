@@ -45,9 +45,9 @@ export default function OrderForm({ orderObj }) {
 
   const handleRadioChange = () => {
     if (!formInput.orderType) {
-      formInput.orderType = 'Dine-In';
+      formInput.orderType = 'In-person';
     } else {
-      formInput.orderType = 'Takeout';
+      formInput.orderType = 'Phone';
     }
   };
 
@@ -113,7 +113,7 @@ export default function OrderForm({ orderObj }) {
         <Form.Check
           className="mb-3"
           inline
-          label="Takeout"
+          label="Phone Order?"
           name="orderType"
           type="checkbox"
           value={formInput.orderType}
