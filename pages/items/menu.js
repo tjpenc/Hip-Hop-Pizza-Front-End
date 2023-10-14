@@ -11,10 +11,12 @@ export default function Menu() {
     getItems().then(setItems);
   }, []);
 
+  const getAllItems = () => getItems().then(setItems);
+
   return (
     <>
       <h1>Menu</h1>
-      {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={null} onUpdate={() => {}} isAddingItems={false} />)}
+      {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={null} onUpdate={getAllItems} isAddingItems={false} />)}
       <br />
       <Link passHref href="/items/createItem">
         <Button>Add a New Item</Button>
