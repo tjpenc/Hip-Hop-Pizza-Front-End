@@ -23,7 +23,6 @@ export default function OrderForm({ orderObj }) {
     if (orderObj.id) {
       setFormInput(orderObj);
     }
-    console.warn(orderObj);
   }, [orderObj]);
 
   const handleChange = (e) => {
@@ -32,7 +31,6 @@ export default function OrderForm({ orderObj }) {
       ...prevState,
       [name]: value,
     }));
-    console.warn(formInput);
   };
 
   const addUid = () => {

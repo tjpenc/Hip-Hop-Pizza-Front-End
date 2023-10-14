@@ -13,7 +13,6 @@ function RegisterForm({ user, onUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.warn('clicked');
     registerUser(formData).then(() => onUpdate(user.uid));
   };
 
