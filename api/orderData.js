@@ -56,6 +56,17 @@ const updateOrder = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const deleteRevenueNode = (id) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/revenue/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 const deleteOrder = (id) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/orders/${id}`, {
     method: 'DELETE',
@@ -63,6 +74,7 @@ const deleteOrder = (id) => new Promise((resolve, reject) => {
       'Content-Type': 'application/json',
     },
   })
+    .then(deleteRevenueNode(id))
     .then((data) => resolve(data))
     .catch(reject);
 });
@@ -127,4 +139,5 @@ export {
   closeOrder,
   createRevenueNode,
   getTotalRevenue,
+  deleteRevenueNode,
 };

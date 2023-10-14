@@ -24,10 +24,10 @@ export default function DetailedOrderCard({ orderObj }) {
           <Card.Text>Phone: {orderObj.phone}</Card.Text>
           <Card.Text>Email: {orderObj.email}</Card.Text>
           <Card.Text>Order Type: {orderObj.orderType}</Card.Text>
+          <Button variant="danger" size="sm" onClick={() => deleteThisOrder(orderObj.id)}>Delete</Button>
           {orderObj.isOpen
             ? (
               <>
-                <Button variant="danger" size="sm" onClick={() => deleteThisOrder(orderObj.id)}>Delete</Button>
                 <Link passHref href={`/orders/edit/${orderObj.id}`}>
                   <Button variant="success" size="sm">Edit Customer</Button>
                 </Link>

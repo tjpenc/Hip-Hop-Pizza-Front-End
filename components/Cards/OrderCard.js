@@ -15,10 +15,10 @@ export default function OrderCard({ orderObj, onUpdate }) {
             ? <Card.Title>Order Open</Card.Title>
             : <Card.Title>Order Closed</Card.Title>}
           <Card.Text>${orderObj.totalPrice}</Card.Text>
+          <Button variant="danger" size="sm" onClick={() => deleteThisOrder(orderObj.id)}>Delete</Button>
           {orderObj.isOpen
             ? (
               <>
-                <Button variant="danger" size="sm" onClick={() => deleteThisOrder(orderObj.id)}>Delete</Button>
                 <Link passHref href={`/orders/edit/${orderObj.id}`}>
                   <Button variant="success" size="sm">Edit Customer</Button>
                 </Link>
