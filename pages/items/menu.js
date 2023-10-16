@@ -7,16 +7,16 @@ import ItemCard from '../../components/Cards/ItemCard';
 export default function Menu() {
   const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    getItems().then(setItems);
-  }, []);
-
   const getAllItems = () => getItems().then(setItems);
+
+  useEffect(() => {
+    getAllItems();
+  }, []);
 
   return (
     <>
       <h1>Menu</h1>
-      {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={null} onUpdate={getAllItems} isOnMenu />)}
+      {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={undefined} onUpdate={getAllItems} isOnMenu />)}
       <br />
       <Link passHref href="/items/createItem">
         <Button>Add a New Item</Button>
