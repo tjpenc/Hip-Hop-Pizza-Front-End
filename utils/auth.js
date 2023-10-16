@@ -40,7 +40,8 @@ const signIn = () => {
   firebase.auth().signInWithPopup(provider);
 };
 
-const signOut = () => {
+const signOut = (router) => {
+  router.push('/');
   firebase.auth().signOut();
 };
 
