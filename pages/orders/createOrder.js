@@ -4,7 +4,7 @@ export default function CreateOrder() {
   return (
     <>
       <h1>Create an Order</h1>
-      <OrderForm />
+      <OrderForm orderObj={undefined} />
     </>
   );
 }

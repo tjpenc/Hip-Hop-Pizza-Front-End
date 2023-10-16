@@ -9,13 +9,15 @@ function Home() {
   const { user } = useAuth();
   const [authUser, setAuthUser] = useState();
 
+  const setNewUser = (newUser) => checkUser(newUser.uid).then((data) => setAuthUser(data[0]));
+
   useEffect(() => {
-    checkUser(user.uid).then((data) => setAuthUser(data[0]));
+    setNewUser(user);
     console.warn('thisUser', authUser);
   }, [user]);
 
-  const onUpdate = () => {
-    checkUser(user.uid).then((data) => setAuthUser(data));
+  const onUpdate = (newUser) => {
+    setNewUser(newUser);
   };
 
   return (

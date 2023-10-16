@@ -44,7 +44,7 @@ const getItemsForOrder = (orderId) => new Promise((resolve, reject) => {
     },
   })
     .then((resp) => {
-      if (resp.status === 404) {
+      if (resp.status === 204) {
         resolve([]);
       } else {
         resolve(resp.json());
