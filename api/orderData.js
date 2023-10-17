@@ -8,7 +8,7 @@ const getOrders = () => new Promise((resolve, reject) => {
     },
   })
     .then((resp) => {
-      if (resp.status === 404) {
+      if (resp.status === 204) {
         resolve([]);
       } else {
         resolve(resp.json());
@@ -124,8 +124,13 @@ const getTotalRevenue = () => new Promise((resolve, reject) => {
       'Content-Type': 'application/json',
     },
   })
-    .then((resp) => resp.json())
-    .then((data) => resolve(data))
+    .then((resp) => {
+      if (resp.status === 204) {
+        resolve(0);
+      } else {
+        resolve(resp.json());
+      }
+    })
     .catch(reject);
 });
 

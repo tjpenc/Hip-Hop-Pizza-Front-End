@@ -8,6 +8,11 @@ export default function DetailedOrderCard({ orderObj }) {
   const router = useRouter();
   const deleteThisOrder = (id) => deleteOrder(id).then(router.push('/orders/orders'));
 
+  const convertDate = () => {
+    const date = new Date(Date.parse(orderObj.dateClosed));
+    return `${date.getFullYear()}/${(date.getMonth() + 1)}/${(date.getUTCDate())}`;
+  };
+
   return (
     <>
       <Card style={{ width: '18rem' }}>
@@ -16,11 +21,11 @@ export default function DetailedOrderCard({ orderObj }) {
             ? <Card.Title>Order Open</Card.Title>
             : (
               <>
-                <Card.Title>Order Closed {orderObj.dateClosed}</Card.Title>
+                <Card.Title>Order Closed {convertDate()}</Card.Title>
               </>
             )}
-          <Card.Title>{orderObj.name}</Card.Title>
-          <Card.Text>${orderObj.totalPrice}</Card.Text>
+          <Card.Title>Customer: {orderObj.name}</Card.Title>
+          <Card.Text>Price: ${orderObj.totalPrice}</Card.Text>
           <Card.Text>Phone: {orderObj.phone}</Card.Text>
           <Card.Text>Email: {orderObj.email}</Card.Text>
           <Card.Text>Order Type: {orderObj.orderType}</Card.Text>
