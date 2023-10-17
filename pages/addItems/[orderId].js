@@ -24,17 +24,21 @@ export default function AddItems() {
 
   return (
     <>
-      <h1>{`Add Items to ${order.name}'s Order`}</h1>
+      <h1>{`Add Items to ${order.name}'s Order`} | Total Price: ${order.totalPrice}</h1>
       <div>
-        <h2>Items Added | Total Price: ${order.totalPrice}</h2>
+        <h2>Items Added</h2>
         {orderItems?.map((orderItem) => (
           <span key={orderItems.indexOf(orderItem)}> {orderItem.item.name}: ${orderItem.item.price} |
           </span>
         ))}
       </div>
-      <Link passHref href={`/orders/closeOrder/${orderId}`}>
-        <Button>Continue to Checkout</Button>
-      </Link>
+      {orderItems.length >= 1
+        ? (
+          <Link passHref href={`/orders/closeOrder/${orderId}`}>
+            <Button>Continue to Checkout</Button>
+          </Link>
+        )
+        : ''}
       <br />
       <h2>Menu</h2>
       {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={order} onUpdate={getAllOrderItems} isAddingItems />)}

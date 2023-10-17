@@ -121,7 +121,7 @@ OrderForm.propTypes = {
 };
 
 OrderForm.defaultProps = {
-  orderObj: PropTypes.shape({
+  orderObj: {
     id: 0,
     uid: '',
     name: '',
@@ -129,5 +129,5 @@ OrderForm.defaultProps = {
     phone: '',
     orderType: false,
     paymentTypeId: 1,
-  }),
+  },
 };

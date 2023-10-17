@@ -27,6 +27,7 @@ export default function ViewDetailedOrder() {
       </Link>
       <h1>{`${order.name}'s`} Order</h1>
       <DetailedOrderCard key={order.id} orderObj={order} />
+      <h6>Customer Comments: {order.comments}</h6>
       <br />
       {orderItems?.map((orderItem) => <ItemCard key={orderItems.indexOf(orderItem)} itemObj={orderItem.item} orderObj={order} onUpdate={getItemsForThisOrder} isOnDetailedOrder />)}
     </>
