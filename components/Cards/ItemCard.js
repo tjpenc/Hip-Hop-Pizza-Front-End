@@ -20,7 +20,6 @@ export default function ItemCard({
           ? (
             <>
               <Button variant="primary" onClick={addItemToThisOrder}>Add to Order</Button>
-              <Button variant="danger" onClick={removeItemFromThisOrder}>Remove From Order</Button>
             </>
           )
           : ''}

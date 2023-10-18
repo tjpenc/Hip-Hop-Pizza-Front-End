@@ -29,7 +29,9 @@ export default function ViewDetailedOrder() {
       <DetailedOrderCard key={order.id} orderObj={order} />
       <h6>Customer Comments: {order.comments}</h6>
       <br />
-      {orderItems?.map((orderItem) => <ItemCard key={orderItems.indexOf(orderItem)} itemObj={orderItem.item} orderObj={order} onUpdate={getItemsForThisOrder} isOnDetailedOrder />)}
+      <div className="flexwrap">
+        {orderItems?.map((orderItem) => <ItemCard key={orderItems.indexOf(orderItem)} itemObj={orderItem.item} orderObj={order} onUpdate={getItemsForThisOrder} isOnDetailedOrder />)}
+      </div>
     </>
   );
 }
