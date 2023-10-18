@@ -20,3 +20,20 @@ a {
 body {
   background-color: #88effd;
 }
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flexwrap {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
