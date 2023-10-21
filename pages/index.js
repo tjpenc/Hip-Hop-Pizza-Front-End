@@ -33,6 +33,8 @@ function Home() {
           }}
         >
           <h1>Hello {user?.fbUser?.displayName}! </h1>
+          <br />
+          <br />
           <Link passHref href="/orders/orders">
             <Button variant="secondary" type="button" size="lg" className="copy-btn">
               View Orders

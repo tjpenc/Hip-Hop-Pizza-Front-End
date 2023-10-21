@@ -17,11 +17,11 @@ export default function Menu() {
     <>
       <h1>Menu</h1>
       <Link passHref href="/items/createItem">
-        <Button>Add a New Item</Button>
+        <Button variant="secondary">Add a New Item</Button>
       </Link>
       <br />
       <br />
-      <div className="flexwrap">
+      <div className="flex-space-between align-items">
         {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={undefined} onUpdate={getAllItems} isOnMenu />)}
       </div>
       <br />

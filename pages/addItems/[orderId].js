@@ -25,18 +25,20 @@ export default function AddItems() {
 
   return (
     <>
-      <h1>{`Add Items to ${order.name}'s Order`} | Total Price: ${order.totalPrice}</h1>
+      <h1>{`${order.name}'s Order`} | Total Price: ${order.totalPrice}</h1>
+      <br />
       {orderItems.length >= 1
         ? (
-          <Link passHref href={`/orders/closeOrder/${orderId}`}>
-            <Button>Continue to Checkout</Button>
-          </Link>
+          <div className="flex-center">
+            <Link passHref href={`/orders/closeOrder/${orderId}`}>
+              <Button variant="secondary" className="m-3" style={{ width: '20%' }}>Continue to Checkout</Button>
+            </Link>
+          </div>
         )
         : ''}
-      <br />
-      <div className="flex-space-between">
-        <div>
-          <div className="flex">
+      <div className="addItemContainer">
+        <div className="addItemColumn">
+          <div className="flex-center">
             <h2>Items Added</h2>
           </div>
           <div className="flexwrap">
@@ -45,9 +47,11 @@ export default function AddItems() {
             ))}
           </div>
         </div>
-        <div>
-          <h2>Menu</h2>
-          <div className="flexwrap">
+        <div className="addItemColumn">
+          <div className="flex-center">
+            <h2>Menu</h2>
+          </div>
+          <div className="flex-center flexwrap">
             {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={order} onUpdate={getAllOrderItems} isAddingItems />)}
           </div>
         </div>

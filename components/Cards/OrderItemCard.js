@@ -1,23 +1,27 @@
 import PropTypes from 'prop-types';
-import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { deleteOrderItem } from '../../api/orderItemData';
 
-export default function OrderItemCard({ orderItemObj, onUpdate }) {
+export default function OrderItemCard({ orderItemObj, onUpdate, isOnDetailedOrder }) {
   const deleteThisOrderItem = () => deleteOrderItem(orderItemObj.id).then(onUpdate);
   return (
     <>
-      <Card style={{ width: '18rem' }}>
-        <Card.Body>
-          <Card.Title>{orderItemObj.item.name}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">${orderItemObj.item.price}</Card.Subtitle>
-          <Link passHref href={`/addItems/edit/${orderItemObj.id}`}>
-            <Button>Edit Item</Button>
-          </Link>
-          <Button onClick={deleteThisOrderItem}>Delete Item</Button>
-        </Card.Body>
-      </Card>
+      {isOnDetailedOrder
+        ? ''
+        : (
+          <div className="order-item black-border">
+            <span>{orderItemObj.item.name}</span>
+            <span>${orderItemObj.item.price}</span>
+            <div className="order-item-button-container">
+              <Link passHref href={`/addItems/edit/${orderItemObj.id}`}>
+                <button type="button" className="order-item-button">Edit</button>
+              </Link>
+              <button type="button" className="order-item-button" onClick={deleteThisOrderItem}>X</button>
+            </div>
+          </div>
+        )}
     </>
+
   );
 }
 
@@ -31,4 +35,9 @@ OrderItemCard.propTypes = {
     }),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
+  isOnDetailedOrder: PropTypes.bool,
+};
+
+OrderItemCard.defaultProps = {
+  isOnDetailedOrder: false,
 };

@@ -8,24 +8,27 @@ export default function OrderCard({ orderObj, onUpdate }) {
 
   return (
     <>
-      <Card style={{ width: '18rem' }}>
+      <Card className="m-3" style={{ width: '18rem' }}>
         <Card.Body>
           <Card.Title>{orderObj.name}</Card.Title>
           {orderObj.isOpen
             ? <Card.Title>Order Open</Card.Title>
             : <Card.Title>Order Closed</Card.Title>}
           <Card.Text>${orderObj.totalPrice}</Card.Text>
-          <Button variant="danger" size="sm" onClick={() => deleteThisOrder(orderObj.id)}>Delete</Button>
           {orderObj.isOpen
             ? (
               <>
                 <Link passHref href={`/orders/edit/${orderObj.id}`}>
-                  <Button variant="success" size="sm">Edit Customer</Button>
+                  <Button variant="warning" className="m-3" size="sm">Edit Customer</Button>
+                </Link>
+                <Link passHref href={`/addItems/${orderObj.id}`}>
+                  <Button variant="success" className="m-3" size="sm">Add Items</Button>
                 </Link>
               </>
             ) : ''}
+          <Button variant="danger" size="sm" className="m-3" onClick={() => deleteThisOrder(orderObj.id)}>Delete</Button>
           <Link passHref href={`/orders/${orderObj.id}`}>
-            <Button variant="primary" size="sm">Details</Button>
+            <Button variant="primary" className="m-3" size="sm">Details</Button>
           </Link>
         </Card.Body>
       </Card>

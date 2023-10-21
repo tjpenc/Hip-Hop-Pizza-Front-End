@@ -39,7 +39,7 @@ export default function CloseOrderForm() {
   };
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Tip</Form.Label>
           <Form.Control
@@ -78,9 +78,9 @@ export default function CloseOrderForm() {
           </Form.Select>
         </Form.Group>
         <br />
-        <Button type="Submit">Close Order</Button>
+        <Button type="Submit" variant="secondary" className="m-1">Close Order</Button>
         <Link passHref href={`/addItems/${id}`}>
-          <Button variant="primary">Back to Menu</Button>
+          <Button variant="secondary">Back to Menu</Button>
         </Link>
       </Form>
     </>

@@ -43,7 +43,7 @@ export default function ItemForm({ itemObj, orderItemObj, isOrderItem }) {
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Item Name</Form.Label>
           <Form.Control

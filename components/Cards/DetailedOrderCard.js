@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { deleteOrder } from '../../api/orderData';
 
-export default function DetailedOrderCard({ orderObj }) {
+export default function DetailedOrderCard({ orderObj, hasOrderItems }) {
   const router = useRouter();
   const deleteThisOrder = (id) => deleteOrder(id).then(router.push('/orders/orders'));
 
@@ -15,7 +15,7 @@ export default function DetailedOrderCard({ orderObj }) {
 
   return (
     <>
-      <Card style={{ width: '18rem' }}>
+      <Card style={{ width: '50%' }}>
         <Card.Body>
           {orderObj.isOpen
             ? <Card.Title>Order Open</Card.Title>
@@ -29,21 +29,25 @@ export default function DetailedOrderCard({ orderObj }) {
           <Card.Text>Phone: {orderObj.phone}</Card.Text>
           <Card.Text>Email: {orderObj.email}</Card.Text>
           <Card.Text>Order Type: {orderObj.orderType}</Card.Text>
-          <Button variant="danger" size="sm" onClick={() => deleteThisOrder(orderObj.id)}>Delete</Button>
+          <Button className="m-1" variant="danger" size="sm" onClick={() => deleteThisOrder(orderObj.id)}>Delete</Button>
           {orderObj.isOpen
             ? (
               <>
                 <Link passHref href={`/orders/edit/${orderObj.id}`}>
-                  <Button variant="success" size="sm">Edit Customer</Button>
+                  <Button className="m-1" variant="warning" size="sm">Edit Customer</Button>
                 </Link>
                 <Link passHref href={`/addItems/${orderObj.id}`}>
-                  <Button variant="primary" size="sm">Edit Items</Button>
-                </Link>
-                <Link passHref href={`/orders/closeOrder/${orderObj.id}`}>
-                  <Button variant="primary" size="sm">Close Order</Button>
+                  <Button className="m-1" variant="success" size="sm">Add Items</Button>
                 </Link>
               </>
             ) : ''}
+          {hasOrderItems
+            ? (
+              <Link passHref href={`/orders/closeOrder/${orderObj.id}`}>
+                <Button className="m-1" variant="primary" size="sm">Close Order</Button>
+              </Link>
+            )
+            : ''}
         </Card.Body>
       </Card>
     </>
@@ -61,4 +65,5 @@ DetailedOrderCard.propTypes = {
     email: PropTypes.string,
     orderType: PropTypes.string,
   }).isRequired,
+  hasOrderItems: PropTypes.bool.isRequired,
 };

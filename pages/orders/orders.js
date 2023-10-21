@@ -39,14 +39,14 @@ export default function ViewOrders() {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex mt-3">
         <h1>{filterStatus ? `${filterStatus} Orders` : 'All Orders'}</h1>
-        <Button variant="primary" onClick={() => filterOrders('')}>All orders</Button>
-        <Button variant="primary" onClick={() => filterOrders('Open')}>Open Orders</Button>
-        <Button variant="primary" onClick={() => filterOrders('Closed')}>Closed orders</Button>
+        <Button variant="secondary" onClick={() => filterOrders('')}>All orders</Button>
+        <Button variant="secondary" onClick={() => filterOrders('Open')}>Open Orders</Button>
+        <Button variant="secondary" onClick={() => filterOrders('Closed')}>Closed orders</Button>
       </div>
       <br />
-      <div className="flex">
+      <div className="flex-space-between">
         {orders?.length === 0
           ? 'There are no orders in the system'
           : orders?.map((order) => <OrderCard key={order.id} orderObj={order} onUpdate={getAllOrders} />)}
