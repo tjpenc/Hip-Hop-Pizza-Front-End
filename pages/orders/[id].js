@@ -23,10 +23,14 @@ export default function ViewDetailedOrder() {
   return (
     <>
       <Link passHref href="/orders/orders">
-        <Button>{'<--'} Back to Orders</Button>
+        <Button className="m-3" variant="secondary">{'<--'} Back to Orders</Button>
       </Link>
-      <h1>{`${order.name}'s`} Order</h1>
-      <DetailedOrderCard key={order.id} orderObj={order} />
+      <div className="flex-center">
+        <h1>{`${order.name}'s`} Order</h1>
+      </div>
+      <div className="flex-center m-3">
+        <DetailedOrderCard key={order.id} orderObj={order} />
+      </div>
       <h6>Customer Comments: {order.comments}</h6>
       <br />
       <div className="flexwrap">

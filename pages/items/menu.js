@@ -21,7 +21,7 @@ export default function Menu() {
       </Link>
       <br />
       <br />
-      <div className="flexwrap">
+      <div className="flex-space-between align-items">
         {items?.map((item) => <ItemCard key={item.id} itemObj={item} orderObj={undefined} onUpdate={getAllItems} isOnMenu />)}
       </div>
       <br />

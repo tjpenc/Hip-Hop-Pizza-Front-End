@@ -10,23 +10,28 @@ export default function ItemCard({
   const deleteThisItem = () => deleteItem(itemObj.id).then(onUpdate);
   const addItemToThisOrder = () => addOrderItem(orderObj.id, itemObj.id).then(onUpdate);
   const removeItemFromThisOrder = () => deleteOrderItem(orderObj.id, itemObj.id).then(onUpdate);
+  const handleBodyClick = () => {
+    if (isAddingItems) {
+      addItemToThisOrder();
+    }
+  };
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Body>
+    <Card className={isAddingItems ? 'm-3 adding-items' : 'm-3'} style={{ width: '18rem' }}>
+      <Card.Body onClick={handleBodyClick}>
         <Card.Title>{itemObj.name}</Card.Title>
         <Card.Text>${itemObj.price}</Card.Text>
-        {isAddingItems
+        {/* {isAddingItems
           ? (
             <>
-              <Button variant="primary" onClick={addItemToThisOrder}>Add to Order</Button>
+              <Button className="m-3" variant="primary" onClick={addItemToThisOrder}>Add to Order</Button>
             </>
           )
-          : ''}
+          : ''} */}
         {isOnMenu
           ? (
             <>
-              <Button variant="danger" size="sm" onClick={() => deleteThisItem(itemObj.id)}>Delete</Button>
+              <Button className="m-3" variant="danger" size="sm" onClick={() => deleteThisItem(itemObj.id)}>Delete</Button>
               <Link passHref href={`/items/edit/${itemObj.id}`}>
                 <Button variant="success">Edit Item</Button>
               </Link>
@@ -36,7 +41,7 @@ export default function ItemCard({
         {isOnDetailedOrder && orderObj.isOpen
           ? (
             <>
-              <Button variant="danger" size="sm" onClick={removeItemFromThisOrder}>Delete From Order</Button>
+              <Button className="m-3" variant="danger" size="sm" onClick={removeItemFromThisOrder}>Delete From Order</Button>
             </>
           )
           : ''}
