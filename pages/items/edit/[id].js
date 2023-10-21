@@ -14,8 +14,13 @@ export default function EditItem() {
 
   return (
     <>
-      <h1>Edit Item</h1>
-      <ItemForm itemObj={item} />
+      <br />
+      <div className="flex-center">
+        <h1>Edit Item</h1>
+      </div>
+      <div className="order-form-container">
+        <ItemForm itemObj={item} />
+      </div>
     </>
   );
 }

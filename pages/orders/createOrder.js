@@ -3,8 +3,13 @@ import OrderForm from '../../components/Forms/OrderForm';
 export default function CreateOrder() {
   return (
     <>
-      <h1>Create an Order</h1>
-      <OrderForm orderObj={undefined} />
+      <br />
+      <div className="flex-center">
+        <h1>Open a New Order</h1>
+      </div>
+      <div className="order-form-container">
+        <OrderForm orderObj={undefined} />
+      </div>
     </>
   );
 }

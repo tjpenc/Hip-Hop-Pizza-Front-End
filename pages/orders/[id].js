@@ -10,10 +10,16 @@ import ItemCard from '../../components/Cards/ItemCard';
 export default function ViewDetailedOrder() {
   const [order, setOrder] = useState({});
   const [orderItems, setOrderItems] = useState([]);
+  const [hasOrderItems, setHasOrderItems] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
-  const getItemsForThisOrder = () => getItemsForOrder(id).then(setOrderItems);
+  const getItemsForThisOrder = () => getItemsForOrder(id).then((orderItemsArray) => {
+    setOrderItems(orderItemsArray);
+    if (orderItemsArray.length > 0) {
+      setHasOrderItems(true);
+    }
+  });
 
   useEffect(() => {
     getSingleOrder(id).then(setOrder);
@@ -29,12 +35,12 @@ export default function ViewDetailedOrder() {
         <h1>{`${order.name}'s`} Order</h1>
       </div>
       <div className="flex-center m-3">
-        <DetailedOrderCard key={order.id} orderObj={order} />
+        <DetailedOrderCard key={order.id} orderObj={order} hasOrderItems={hasOrderItems} />
       </div>
       <h6>Customer Comments: {order.comments}</h6>
       <br />
       <div className="flexwrap">
-        {orderItems?.map((orderItem) => <ItemCard key={orderItems.indexOf(orderItem)} itemObj={orderItem.item} orderObj={order} onUpdate={getItemsForThisOrder} isOnDetailedOrder />)}
+        {orderItems?.map((orderItem) => <ItemCard key={orderItems.indexOf(orderItem)} itemObj={orderItem.item} orderObj={order} onUpdate={getItemsForThisOrder} />)}
       </div>
     </>
   );

@@ -14,8 +14,13 @@ export default function EditOrder() {
 
   return (
     <>
-      <h1>Edit Customer Details</h1>
-      <OrderForm orderObj={order} />
+      <br />
+      <div className="flex-center">
+        <h1>Edit Customer Details</h1>
+      </div>
+      <div className="order-form-container">
+        <OrderForm orderObj={order} />
+      </div>
     </>
   );
 }

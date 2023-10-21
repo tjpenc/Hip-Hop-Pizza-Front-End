@@ -14,8 +14,15 @@ export default function CloseOrder() {
 
   return (
     <>
-      <h1>{`Checkout for ${order.name}'s Order`} | Total Price: ${`${order.totalPrice}`}</h1>
-      <CloseOrderForm />
+      <br />
+      <div className="flex-center">
+        <h1>{`Checkout for ${order.name}'s Order`} | Total Price: ${`${order.totalPrice}
+        `}
+        </h1>
+      </div>
+      <div className="order-form-container">
+        <CloseOrderForm />
+      </div>
     </>
   );
 }

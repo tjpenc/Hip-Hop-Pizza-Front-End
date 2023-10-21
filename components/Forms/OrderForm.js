@@ -58,12 +58,12 @@ export default function OrderForm({ orderObj }) {
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Customer Name</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Your Name"
+            placeholder="Customer Name"
             name="name"
             value={formInput.name}
             onChange={handleChange}
@@ -102,7 +102,7 @@ export default function OrderForm({ orderObj }) {
           onChange={handleRadioChange}
           id="inline-checkbox-1"
         />
-        <Button type="Submit">Submit</Button>
+        <Button type="Submit" variant="secondary">Create Order</Button>
       </Form>
     </>
   );
@@ -115,7 +115,7 @@ OrderForm.propTypes = {
     name: PropTypes.string,
     email: PropTypes.string,
     phone: PropTypes.string,
-    orderType: PropTypes.bool,
+    orderType: PropTypes.oneOfType(PropTypes.bool, PropTypes.string),
     paymentTypeId: PropTypes.number,
   }),
 };

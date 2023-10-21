@@ -17,7 +17,7 @@ export default function Menu() {
     <>
       <h1>Menu</h1>
       <Link passHref href="/items/createItem">
-        <Button>Add a New Item</Button>
+        <Button variant="secondary">Add a New Item</Button>
       </Link>
       <br />
       <br />

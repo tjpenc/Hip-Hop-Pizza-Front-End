@@ -2,14 +2,13 @@ import { Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { deleteItem } from '../../api/itemData';
-import { addOrderItem, deleteOrderItem } from '../../api/orderItemData';
+import { addOrderItem } from '../../api/orderItemData';
 
 export default function ItemCard({
-  itemObj, orderObj, onUpdate, isAddingItems, isOnMenu, isOnDetailedOrder,
+  itemObj, orderObj, onUpdate, isAddingItems, isOnMenu,
 }) {
   const deleteThisItem = () => deleteItem(itemObj.id).then(onUpdate);
   const addItemToThisOrder = () => addOrderItem(orderObj.id, itemObj.id).then(onUpdate);
-  const removeItemFromThisOrder = () => deleteOrderItem(orderObj.id, itemObj.id).then(onUpdate);
   const handleBodyClick = () => {
     if (isAddingItems) {
       addItemToThisOrder();
@@ -21,13 +20,6 @@ export default function ItemCard({
       <Card.Body onClick={handleBodyClick}>
         <Card.Title>{itemObj.name}</Card.Title>
         <Card.Text>${itemObj.price}</Card.Text>
-        {/* {isAddingItems
-          ? (
-            <>
-              <Button className="m-3" variant="primary" onClick={addItemToThisOrder}>Add to Order</Button>
-            </>
-          )
-          : ''} */}
         {isOnMenu
           ? (
             <>
@@ -35,13 +27,6 @@ export default function ItemCard({
               <Link passHref href={`/items/edit/${itemObj.id}`}>
                 <Button variant="success">Edit Item</Button>
               </Link>
-            </>
-          )
-          : ''}
-        {isOnDetailedOrder && orderObj.isOpen
-          ? (
-            <>
-              <Button className="m-3" variant="danger" size="sm" onClick={removeItemFromThisOrder}>Delete From Order</Button>
             </>
           )
           : ''}
@@ -64,7 +49,6 @@ ItemCard.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   isAddingItems: PropTypes.bool,
   isOnMenu: PropTypes.bool,
-  isOnDetailedOrder: PropTypes.bool,
 };
 
 ItemCard.defaultProps = {
@@ -74,5 +58,4 @@ ItemCard.defaultProps = {
   },
   isAddingItems: false,
   isOnMenu: false,
-  isOnDetailedOrder: false,
 };

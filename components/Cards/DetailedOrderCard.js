@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { deleteOrder } from '../../api/orderData';
 
-export default function DetailedOrderCard({ orderObj }) {
+export default function DetailedOrderCard({ orderObj, hasOrderItems }) {
   const router = useRouter();
   const deleteThisOrder = (id) => deleteOrder(id).then(router.push('/orders/orders'));
 
@@ -39,11 +39,15 @@ export default function DetailedOrderCard({ orderObj }) {
                 <Link passHref href={`/addItems/${orderObj.id}`}>
                   <Button className="m-1" variant="success" size="sm">Add Items</Button>
                 </Link>
-                <Link passHref href={`/orders/closeOrder/${orderObj.id}`}>
-                  <Button className="m-1" variant="primary" size="sm">Close Order</Button>
-                </Link>
               </>
             ) : ''}
+          {hasOrderItems
+            ? (
+              <Link passHref href={`/orders/closeOrder/${orderObj.id}`}>
+                <Button className="m-1" variant="primary" size="sm">Close Order</Button>
+              </Link>
+            )
+            : ''}
         </Card.Body>
       </Card>
     </>
@@ -61,4 +65,5 @@ DetailedOrderCard.propTypes = {
     email: PropTypes.string,
     orderType: PropTypes.string,
   }).isRequired,
+  hasOrderItems: PropTypes.bool.isRequired,
 };
